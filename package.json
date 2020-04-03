@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/douglasOlv/video-maker/issues"
   },
-  "homepage": "https://github.com/douglasOlv/video-maker#readme"
+  "homepage": "https://github.com/douglasOlv/video-maker#readme",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
 }
