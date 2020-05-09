@@ -12,27 +12,18 @@ const nlu = new NaturalLanguageUnderstandingV1({
   url: 'https://gateway.watsonplatform.net/natural-language-understanding/api/',
 });
 
-async function fetchWatsonAndReturnKeywords(sentence) {
-  try {
-    const response = await nlu.analyze({
-      text: sentence,
-      features: {
-        keywords: {},
-      },
-    });
-    const keywords = response.result.keywords.map((keyword) => keyword.text);
-    return keywords;
-  } catch (err) {
-    console.log(err);
-  }
-}
+const state = require('./state');
 
-async function robot(content) {
+async function robot() {
+  const content = state.load();
+
   await fetchContentFromWikipedia(content);
   sanitizeContent(content);
   breakContentIntroSentences(content);
   limitMaximumSentences(content);
   await fetchKeyWordsOfAllSentences(content);
+
+  state.save(content);
 
   async function fetchContentFromWikipedia(content) {
     const algorithmiaAlthenticated = algorithmia(algorithmiaKey);
@@ -91,6 +82,20 @@ async function robot(content) {
   async function fetchKeyWordsOfAllSentences(content) {
     for (const sentence of content.sentences) {
       sentence.keywords = await fetchWatsonAndReturnKeywords(sentence.text);
+    }
+  }
+  async function fetchWatsonAndReturnKeywords(sentence) {
+    try {
+      const response = await nlu.analyze({
+        text: sentence,
+        features: {
+          keywords: {},
+        },
+      });
+      const keywords = response.result.keywords.map((keyword) => keyword.text);
+      return keywords;
+    } catch (err) {
+      console.log(err);
     }
   }
 }
