@@ -533,6 +533,11 @@ ibm-watson@^5.5.0:
     isstream "~0.1.2"
     websocket "^1.0.28"
 
+image-downloader@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/image-downloader/-/image-downloader-4.0.1.tgz#2cf211107050595ed1f99af4531ebea4aeea3dfc"
+  integrity sha512-VfjlMHx1DDPN27x6IC15+6oejeG0A1S955r7oF4rsxqAh8+ygJ3avK8yi8pJztz5qir/x1dFV+eCIy3155byhg==
+
 ip-regex@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/ip-regex/-/ip-regex-2.1.0.tgz#fa78bf5d2e6913c911ce9f819ee5146bb6d844e9"
