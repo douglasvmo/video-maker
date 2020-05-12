@@ -106,3 +106,5 @@ dist
 credentials/*.json
 # data structure content
 content.json
+# content
+content/*
