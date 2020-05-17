@@ -17,12 +17,16 @@
   },
   "homepage": "https://github.com/douglasOlv/video-maker#readme",
   "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.0.20",
+    "@ffprobe-installer/ffprobe": "^1.0.12",
     "algorithmia": "^0.3.10",
+    "fluent-ffmpeg": "^2.1.2",
     "gm": "^1.23.1",
     "googleapis": "^50.0.0",
     "ibm-watson": "^5.5.0",
     "image-downloader": "^4.0.1",
     "readline-sync": "^1.4.10",
-    "sbd": "^1.0.18"
+    "sbd": "^1.0.18",
+    "videoshow": "^0.1.12"
   }
 }
