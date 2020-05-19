@@ -12,7 +12,7 @@ async function robot() {
   const content = state.load();
 
   await convertAllImages(content);
-  await createAllSentenceImage(content);
+  // await createAllSentenceImage(content);
   await createYouTubethumbnail();
   await renderVideoWithNode(content);
 
@@ -141,63 +141,64 @@ async function robot() {
     });
   }
   async function renderVideoWithNode(content) {
-    const images = [];
-    for (
-      let sentenceIndex = 0;
-      sentenceIndex < content.sentences.length;
-      sentenceIndex++
-    ) {
-      images.push({
-        path: `./content/${sentenceIndex}-converted.png`,
-        caption: content.sentences[sentenceIndex].text,
-      });
-    }
+    return new Promise((resolve, reject) => {
+      const images = [];
+      for (
+        let sentenceIndex = 0;
+        sentenceIndex < content.sentences.length;
+        sentenceIndex++
+      ) {
+        images.push({
+          path: `./content/${sentenceIndex}-converted.png`,
+          caption: content.sentences[sentenceIndex].text,
+        });
+      }
 
-    const videoOptions = {
-      fps: 25,
-      loop: 5, // seconds
-      transition: true,
-      transitionDuration: 1, // seconds
-      videoBitrate: 1024,
-      videoCodec: 'libx264',
-      size: '640x?',
-      audioBitrate: '128k',
-      audioChannels: 2,
-      format: 'mp4',
-      pixelFormat: 'yuv420p',
-      useSubRipSubtitles: false, // Use ASS/SSA subtitles instead
-      subtitleStyle: {
-        Fontname: 'Verdana',
-        Fontsize: '42',
-        PrimaryColour: '11861244',
-        SecondaryColour: '11861244',
-        TertiaryColour: '11861244',
-        BackColour: '-2147483640',
-        Bold: '2',
-        Italic: '0',
-        BorderStyle: '2',
-        Outline: '2',
-        Shadow: '3',
-        Alignment: '1', // left, middle, right
-        MarginL: '40',
-        MarginR: '60',
-        MarginV: '40',
-      },
-    };
+      const videoOptions = {
+        fps: 25,
+        loop: 5, // seconds
+        transition: true,
+        transitionDuration: 1, // seconds
+        videoBitrate: 1024,
+        videoCodec: 'libx264',
+        size: '640x?',
+        audioBitrate: '128k',
+        audioChannels: 2,
+        format: 'mp4',
+        pixelFormat: 'yuv420p',
+        useSubRipSubtitles: false, // Use ASS/SSA subtitles instead
+        subtitleStyle: {
+          Fontname: 'Roboto',
+          Fontsize: '38',
+          PrimaryColour: '16777215',
+          Bold: '2',
+          Italic: '0',
+          BorderStyle: '2',
+          Outline: '2',
+          Shadow: '3',
+          Alignment: '1', // left, middle, right
+          MarginL: '40',
+          MarginR: '60',
+          MarginV: '40',
+        },
+      };
 
-    videoshow(images, videoOptions)
-      .save('video.mp4')
-      .on('progress', function (data) {
-        const percent = data.percent.toFixed(2);
-        console.log('> [video-robot] ffmpeg process: ', percent);
-      })
-      .on('error', function (err, stdout, stderr) {
-        console.error('Error:', err);
-        console.error('ffmpeg stderr:', stderr);
-      })
-      .on('end', function (output) {
-        console.error('Video created in:', output);
-      });
+      videoshow(images, videoOptions)
+        .save(`${content.searchTerm}.mp4`)
+        .on('progress', function (data) {
+          const percent = data.percent.toFixed(2);
+          console.log('> [video-robot] ffmpeg process: ', percent);
+        })
+        .on('error', function (err, stdout, stderr) {
+          console.error('Error:', err);
+          console.error('ffmpeg stderr:', stderr);
+          return reject(err);
+        })
+        .on('end', function (output) {
+          console.error('Video created in:', output);
+          resolve();
+        });
+    });
   }
 }
 
