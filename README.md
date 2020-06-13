@@ -14,7 +14,26 @@ This project create a video from a search term. The search term is fetched in wi
 
 ## :star2: &nbsp; Getting Started
 
-- under construction [...]
+1. Cloning the repository
+
+```bash
+git clone https://github.com/douglasOlv/video-maker.git
+cd video-maker
+npm install
+```
+
+2. The keys of access. You need to have keys of access to APIs, of course.
+
+- Sign in [Algorithmia](https://algorithmia.com/) and create a key acesses to WikipediaParser
+- Sign in [IBM](https://cloud.ibm.com/login) and create a key acesses to _Natural Language Understanding_
+- Sign in [Google Cloud Plataform](https://cloud.google.com/) and create a "new project" and search in "API" for "Custom Search API" and select ativate, in Credentials create a new credential API Key
+- Create a [Custom Search Enginer](https://cse.google.com/cse/create/new) and active the image search
+
+3. Start up, you need have NodeJs, of course.
+
+```bash
+node index.js
+```
 
 ## :rocket: &nbsp; Built With
 
