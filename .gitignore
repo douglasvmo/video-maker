@@ -109,3 +109,7 @@ content.json
 # content
 content/*
 *.mp4
+
+#lock
+yarn.lock
+package-lock.json
