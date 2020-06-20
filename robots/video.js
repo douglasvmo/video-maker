@@ -184,7 +184,8 @@ async function robot() {
       };
 
       videoshow(images, videoOptions)
-        .save(`${content.searchTerm}.mp4`)
+        .audio('content/audio-theme.mp3')
+        .save(`content/${content.searchTerm}.mp4`)
         .on('progress', function (data) {
           const percent = data.percent.toFixed(2);
           console.log('> [video-robot] ffmpeg process: ', percent);
