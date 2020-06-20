@@ -108,6 +108,7 @@ credentials/*.json
 content.json
 # content
 content/*
+!content/audio-theme.mp3
 *.mp4
 
 #lock
