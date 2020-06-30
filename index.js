@@ -8,11 +8,11 @@ const robots = {
 const state = require('./robots/state');
 
 async function start() {
-  // robots.input();
-  // await robots.text();
-  // await robots.image();
+  robots.input();
+  await robots.text();
+  await robots.image();
   await robots.video();
-  // await robots.youtube();
+  await robots.youtube();
 
   const content = state.load();
   console.dir(content, { depth: null });

@@ -132,6 +132,21 @@ async function robot() {
       const progress = Math.round((e.bytesRead / videoFileSize) * 100);
       console.log(`> ${progress}% completed`);
     }
+
+    function uploadThumbnail(videoInformation){
+      const videoId = videoInformation.id;
+      const videoTumbnailPath = './content/youtube-thumbnail.jpg';
+
+      const requestParameters = {
+        videoId,
+        media:{
+          mimeType: 'image/jpeg',
+          body: fs.createReadStream(videoTumbnailPath)
+        }
+      }
+      const youtubeResponse = await youtube.thumbnails.set(requestParameters)
+      console.log('> Thumbnail uploded!')
+    }
   }
 }
 module.exports = robot;
